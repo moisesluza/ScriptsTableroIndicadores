@@ -1,0 +1,18 @@
+# Microsoft Developer Studio Project File - Database Project
+Begin DataProject = "ScriptsTableroIndicadores"
+   MSDTVersion = "80"
+   Begin Folder = "Change Scripts"
+   End
+   Begin Folder = "Create Scripts"
+      Script = "ES_FERIADO.sql"
+      Script = "FnSplit.sql"
+      Script = "usp_obtener_LLamadas.sql"
+      Script = "usp_obtener_respuesta_encuestas.sql"
+      Script = "usp_obtener_tickets.sql"
+      Script = "usp_obtener_tiempos_por_estado_tickets.sql"
+   End
+   Begin DBRefFolder = "Database References"
+   End
+   Begin Folder = "Queries"
+   End
+End
