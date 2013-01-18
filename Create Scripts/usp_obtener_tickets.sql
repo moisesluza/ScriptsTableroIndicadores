@@ -12,7 +12,7 @@ CREATE PROCEDURE usp_obtener_tickets
 AS
 BEGIN
 
-select cr.id, ctg.sym as Categoria_Ticket, g.last_name as Grupo_Resolutor 
+select cr.id, ctg.sym as Categoria_Ticket, g.last_name as Grupo_Resolutor --Cambiar por grupo asignado!
 from call_req cr 
     inner join ca_contact g with(nolock) ON cr.group_id = g.contact_uuid 
     inner join prob_ctg ctg with(nolock) ON cr.category = ctg.persid 
@@ -24,3 +24,9 @@ where
     and cr.type='I'
    
 END
+GO
+
+--Otrogar permisos de ejecucion al usuario
+GRANT EXECUTE ON OBJECT::dbo.usp_obtener_tickets
+    TO reportesweb;
+GO

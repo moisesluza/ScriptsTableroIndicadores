@@ -4,12 +4,16 @@ Begin DataProject = "ScriptsTableroIndicadores"
    Begin Folder = "Change Scripts"
    End
    Begin Folder = "Create Scripts"
+      Script = "addworkdays.sql"
       Script = "ES_FERIADO.sql"
       Script = "FnSplit.sql"
       Script = "usp_obtener_LLamadas.sql"
       Script = "usp_obtener_respuesta_encuestas.sql"
       Script = "usp_obtener_tickets.sql"
+      Script = "usp_obtener_tickets_reabiertos.sql"
+      Script = "usp_obtener_ticketsXprimerafechacierre.sql"
       Script = "usp_obtener_tiempos_por_estado_tickets.sql"
+      Script = "zView_TicketsConPrimerCierreYPrimerReabierto.sql"
    End
    Begin DBRefFolder = "Database References"
    End

@@ -27,3 +27,9 @@ group by c.sequence, c.txt, g.last_name
 order by g.last_name, c.sequence
 
 END
+GO
+
+--Otrogar permisos de ejecucion al usuario
+GRANT EXECUTE ON OBJECT::dbo.usp_obtener_respuesta_encuestas
+    TO reportesweb;
+GO

@@ -6,12 +6,15 @@ CREATE PROCEDURE usp_obtener_tiempos_por_estado_tickets
 	@FecIni DATETIME,
 	@FecFin DATETIME,
 	@estados varchar(max),
-    @grupos varchar(max)
+    @grupos varchar(max),
+    @categorias varchar(max),
+    @tipo varchar(1)
 AS
 BEGIN
 
 select 
 	obj_id, 
+	DATEADD(ss, open_date - 18000, '19700101') as open_date,
 	l.location_name as Sede_Usuario, 
 	left(l.location_name,2) as Tipo_Sede_Usuario, 
 	g.last_name AS Grupo_Asignado, 
@@ -41,14 +44,22 @@ from usp_kpi_ticket_data kpi with(nolock)
 	inner join ca_location l with(nolock) ON c.location_uuid = l.location_uuid 
 	inner join ca_contact g with(nolock) ON cr.group_id = g.contact_uuid 
 	inner join pri p with(nolock) ON cr.priority = p.enum 
+	inner join prob_ctg cat with(nolock) ON cr.category = cat.persid 
 where field_name='status' and 
 	(DATEADD(ss, cr.resolve_date - 18000, '19700101') between @FecIni and @FecFin or DATEADD(ss, cr.close_date - 18000, '19700101') between @FecIni and @FecFin)
 	and cr.status in (select value from dbo.FnSplit(@estados,',')) 
-	and g.last_name in (select value from dbo.FnSplit(@grupos,',')) 
-   and cr.type='I' 
-   and obj_id not in (select distinct obj_id from usp_kpi_ticket_data where prev_time is null) 
-group by obj_id, field_value, l.location_name, g.last_name, p.sym 
+	and (g.last_name in (select value from dbo.FnSplit(@grupos,',')) or @grupos = '')
+	and (cat.sym in (select value from dbo.FnSplit(@categorias,',')) or @categorias = '')
+    and (cr.type=@tipo or @tipo = '')
+    and obj_id not in (select distinct obj_id from usp_kpi_ticket_data where prev_time is null) 
+group by obj_id, field_value, l.location_name, g.last_name, p.sym, DATEADD(ss, open_date - 18000, '19700101') 
 order by obj_id;
 
 
 END
+GO
+
+--Otrogar permisos de ejecucion al usuario
+GRANT EXECUTE ON OBJECT::dbo.usp_obtener_tiempos_por_estado_tickets
+    TO reportesweb;
+GO
