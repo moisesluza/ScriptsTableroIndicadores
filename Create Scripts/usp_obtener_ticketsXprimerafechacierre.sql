@@ -22,5 +22,5 @@ GO
 
 --Otrogar permisos de ejecucion al usuario
 GRANT EXECUTE ON OBJECT::dbo.usp_obtener_ticketsXprimerafechacierre
-    TO reportesweb;
+    TO public;
 GO

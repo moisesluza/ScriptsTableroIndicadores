@@ -26,3 +26,9 @@ BEGIN
     Select Value = ltrim(rtrim(@List))
     Return
 END
+GO
+
+
+GRANT EXECUTE ON OBJECT::dbo.FnSplit
+    TO public;
+GO

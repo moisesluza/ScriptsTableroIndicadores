@@ -38,5 +38,5 @@ GO
 
 --Otrogar permisos de ejecucion al usuario
 GRANT EXECUTE ON OBJECT::dbo.AddWorkDays
-    TO reportesweb;
+    TO public;
 GO

@@ -61,5 +61,5 @@ GO
 
 --Otrogar permisos de ejecucion al usuario
 GRANT EXECUTE ON OBJECT::dbo.usp_obtener_tiempos_por_estado_tickets
-    TO reportesweb;
+    TO public;
 GO

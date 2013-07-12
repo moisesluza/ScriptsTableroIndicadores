@@ -39,3 +39,7 @@ RETURN  @dFest
 END
 
 GO
+
+GRANT EXECUTE ON OBJECT::dbo.[ES_FERIADO]
+    TO public;
+GO
